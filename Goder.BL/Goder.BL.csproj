@@ -5,10 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="DTO\" />
     <Folder Include="Hubs\" />
-    <Folder Include="MappingProfiles\" />
-    <Folder Include="Services\" />
   </ItemGroup>
 
   <ItemGroup>
