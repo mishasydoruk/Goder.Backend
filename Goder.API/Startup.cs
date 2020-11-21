@@ -12,6 +12,8 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using System.Linq;
 using System.Reflection;
+using Goder.BL.MappingProfiles;
+using Goder.BL.Services;
 
 namespace Goder.API
 {
@@ -60,9 +62,11 @@ namespace Goder.API
                     };
                 });
 
+            services.AddScoped<RegistrationService>();
+
             services.AddAutoMapper(cfg =>
             {
-                // cfg.AddProfile<{NameOfProfile}>();
+                cfg.AddProfile<UserProfile>();
             }, Assembly.GetExecutingAssembly());
 
             services.AddHealthChecks()
