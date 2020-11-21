@@ -1,4 +1,5 @@
 using AutoMapper;
+using Goder.BL.Services;
 using Goder.DAL.Context;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
@@ -30,6 +31,8 @@ namespace Goder.API
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddScoped<UserService>();
+
             services.AddDbContext<GoderContext>(options => options.UseMySql(Configuration.GetConnectionString("GoderDBConnection")));
 
             services.AddControllers()
