@@ -30,7 +30,6 @@ namespace Goder.BL.Services
                 user.CreatedAt = DateTime.Now;
 
                 _context.Users.Add(user);
-
                 await _context.SaveChangesAsync();
 
             }
