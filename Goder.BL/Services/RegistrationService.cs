@@ -31,7 +31,6 @@ namespace Goder.BL.Services
 
                 _context.Users.Add(user);
                 await _context.SaveChangesAsync();
-
             }
             return _mapper.Map<UserDTO>(user);
         }
