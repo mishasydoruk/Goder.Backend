@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Goder.BL.DTO;
+using Goder.BL.Helpers;
 using Goder.BL.Services.Abstract;
 using Goder.DAL.Context;
 using Goder.DAL.Models;
@@ -26,7 +27,7 @@ namespace Goder.BL.Services
 
                 user.FirstName = splitedName[0];
                 user.LastName = splitedName.Length < 2 ? "" : splitedName[1];
-
+                user.AvatarURL = await ImageHelper.GetImageFromUrlAsBase64String(user.AvatarURL);
                 user.CreatedAt = DateTime.Now;
 
                 _context.Users.Add(user);
