@@ -5,6 +5,10 @@ using Goder.DAL.Context;
 using Goder.DAL.Models;
 using AutoMapper;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
+using System.Threading.Tasks;
+using Goder.BL.DTO;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Goder.BL.Services
 {
@@ -15,21 +19,25 @@ namespace Goder.BL.Services
 
         }
 
-        public User GetUser(Guid id)
+        async public Task<ActionResult<UserDTO>>GetUser(Guid id)
         {
-            return _context.Users.FirstOrDefault(c => c.Id == id);
+            User user = await _context.Users.FirstOrDefaultAsync(c => c.Id == id);
+            if (user == null)
+                throw new Exception("User not found");
+            return _mapper.Map<UserDTO>(user);
         }
 
-        public void UpdateUser(Guid id, User user)
+        async public Task<UserDTO> UpdateUser(Guid id, UserDTO user)
         {
-            User dbUser = _context.Users.FirstOrDefault(c => c.Id == id);
-            dbUser.AvatarURL = user.AvatarURL;
-            dbUser.Birthday = user.Birthday;
-            dbUser.CreatedProblems = user.CreatedProblems;
-            dbUser.CreatedSolutions = user.CreatedSolutions;
-            dbUser.Email = user.Email;
-            dbUser.FirstName = user.FirstName;
-            dbUser.LastName = user.LastName;
+            User toDbUser = _mapper.Map<User>(user);
+            User dbUser = await _context.Users.FirstOrDefaultAsync(c => c.Id == id);
+            if (dbUser == null)
+                throw new Exception("User not found");
+            toDbUser.Id = dbUser.Id;
+            toDbUser.CreatedAt = dbUser.CreatedAt;
+            _context.Users.Update(toDbUser);
+            await _context.SaveChangesAsync();
+            return _mapper.Map<UserDTO>(toDbUser);
         }
     }
 }
