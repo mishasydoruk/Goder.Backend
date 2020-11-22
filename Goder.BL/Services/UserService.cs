@@ -8,7 +8,6 @@ using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
 using Goder.BL.DTO;
-using Microsoft.AspNetCore.Mvc;
 
 namespace Goder.BL.Services
 {
@@ -19,7 +18,7 @@ namespace Goder.BL.Services
 
         }
 
-        async public Task<ActionResult<UserDTO>>GetUser(Guid id)
+        public async Task<UserDTO> GetUser(Guid id)
         {
             User user = await _context.Users.FirstOrDefaultAsync(c => c.Id == id);
             if (user == null)
@@ -27,7 +26,7 @@ namespace Goder.BL.Services
             return _mapper.Map<UserDTO>(user);
         }
 
-        async public Task<UserDTO> UpdateUser(Guid id, UserDTO user)
+        public async Task<UserDTO> UpdateUser(Guid id, UserDTO user)
         {
             User toDbUser = _mapper.Map<User>(user);
             User dbUser = await _context.Users.FirstOrDefaultAsync(c => c.Id == id);

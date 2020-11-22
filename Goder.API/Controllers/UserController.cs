@@ -24,27 +24,20 @@ namespace Goder.API
         {
             _userService = contactsService;
         }
-        // GET: api/<UserController>
-        [HttpGet]
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
+
 
         // GET api/<UserController>/5
         [HttpGet("{id}")]
-        async public Task<ActionResult<UserDTO>> Get(Guid id)
+        public async Task<ActionResult<UserDTO>> Get(Guid id)
         {
-            UserDTO user = (await _userService.GetUser(id)).Value;
-            if (user == null)
-                throw new Exception("User not found");
+            UserDTO user = await _userService.GetUser(id);
             return user;
         }
 
 
         // PUT api/<UserController>/5
         [HttpPut("{id}")]
-        async public Task<ActionResult> Put(Guid id, [FromBody] UserDTO user)
+        public async Task<ActionResult> Put(Guid id, [FromBody] UserDTO user)
         {
             return Ok(await _userService.UpdateUser(id,user));
         }
