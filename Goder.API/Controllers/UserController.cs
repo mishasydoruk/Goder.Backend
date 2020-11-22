@@ -30,8 +30,7 @@ namespace Goder.API
         [HttpGet("{id}")]
         public async Task<ActionResult<UserDTO>> Get(Guid id)
         {
-            UserDTO user = await _userService.GetUser(id);
-            return user;
+            return Ok(await _userService.GetUser(id));
         }
 
 
