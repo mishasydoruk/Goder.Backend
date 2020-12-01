@@ -8,11 +8,14 @@
     <Folder Include="DTO\" />
     <Folder Include="Hubs\" />
     <Folder Include="MappingProfiles\" />
-	<Folder Include="Services\" />
+    <Folder Include="Services\" />
+    <Folder Include="Helpers\" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="10.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Http.Features" Version="5.0.0" />
+    <PackageReference Include="System.Drawing.Common" Version="5.0.0" />
   </ItemGroup>
 
   <ItemGroup>

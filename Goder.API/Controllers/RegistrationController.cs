@@ -9,11 +9,11 @@ namespace Goder.API.Controllers
     [Route("api/[controller]")]
     [ApiController]
     [AllowAnonymous]
-    public class RegistratonController : ControllerBase
+    public class RegistrationController : ControllerBase
     {
         private RegistrationService _registrationService;
 
-        public RegistratonController(RegistrationService registrationService)
+        public RegistrationController(RegistrationService registrationService)
         {
             _registrationService = registrationService;
         }

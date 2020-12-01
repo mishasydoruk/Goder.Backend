@@ -9,7 +9,7 @@ namespace Goder.DAL.Models
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public DateTimeOffset CreatedAt { get; set; }
-        public DateTimeOffset  Birthday { get; set; }
+        public DateTimeOffset? Birthday { get; set; }
         public string Email { get; set; }
         public string AvatarURL { get; set; }
         

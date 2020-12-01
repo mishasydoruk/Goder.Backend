@@ -3,14 +3,16 @@ using System;
 using Goder.DAL.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Goder.DAL.Migrations
 {
     [DbContext(typeof(GoderContext))]
-    partial class GoderContextModelSnapshot : ModelSnapshot
+    [Migration("20201122100447_MakeBirthdayOfUserNullable")]
+    partial class MakeBirthdayOfUserNullable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
