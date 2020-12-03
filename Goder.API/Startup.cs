@@ -34,6 +34,7 @@ namespace Goder.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddScoped<UserService>();
+            services.AddScoped<ProblemService>();
 
             services.AddDbContext<GoderContext>(options => options.UseMySql(Configuration.GetConnectionString("GoderDBConnection")));
 
