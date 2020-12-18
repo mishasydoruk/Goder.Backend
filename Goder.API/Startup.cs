@@ -15,6 +15,7 @@ using System.Linq;
 using System.Reflection;
 using Goder.BL.MappingProfiles;
 using Goder.BL.Services;
+using Goder.BL.Hubs;
 
 namespace Goder.API
 {
@@ -34,6 +35,8 @@ namespace Goder.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddScoped<UserService>();
+
+            services.AddSignalR();
 
             services.AddDbContext<GoderContext>(options => options.UseMySql(Configuration.GetConnectionString("GoderDBConnection")));
 
@@ -93,6 +96,7 @@ namespace Goder.API
 
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapHub<CodeRunnerHub>("/codeRunner");
                 endpoints.MapControllers();
                 endpoints.MapHealthChecks("/healthAuth", new HealthCheckOptions
                 {
