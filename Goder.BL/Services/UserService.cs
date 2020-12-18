@@ -6,9 +6,11 @@ using Goder.DAL.Models;
 using AutoMapper;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Http;
 using System.Threading.Tasks;
 using Goder.BL.DTO;
 using Goder.BL.Exceptions;
+using Goder.BL.Helpers;
 
 namespace Goder.BL.Services
 {
@@ -25,6 +27,18 @@ namespace Goder.BL.Services
             if (user == null)
                 throw new NotFoundException("User",id.ToString());
             return _mapper.Map<UserDTO>(user);
+        }
+
+        public async Task<UserDTO> UpdateUserAvatar(Guid id, IFormFile photo)
+        {
+            User dbUser = await _context.Users.FirstOrDefaultAsync(c => c.Id == id);
+            string photoAsBase64String = await ImageHelper.ConvertImageToBase64String(photo);
+            if (dbUser == null)
+                throw new NotFoundException("User",id.ToString());
+            dbUser.AvatarURL = photoAsBase64String;
+            _context.Users.Update(dbUser);
+            await _context.SaveChangesAsync();
+            return _mapper.Map<UserDTO>(dbUser);
         }
 
         public async Task<UserDTO> UpdateUser(Guid id, UserDTO user)
