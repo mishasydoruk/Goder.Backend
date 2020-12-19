@@ -5,9 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="DTO\" />
     <Folder Include="Hubs\" />
-    <Folder Include="MappingProfiles\" />
     <Folder Include="Services\" />
     <Folder Include="Helpers\" />
   </ItemGroup>
@@ -21,6 +19,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Goder.DAL\Goder.DAL.csproj" />
+    <ProjectReference Include="..\RabbitMQ.Wrapper\RabbitMQ.Wrapper.csproj" />
   </ItemGroup>
 
 </Project>

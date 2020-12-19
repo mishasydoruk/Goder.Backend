@@ -1,5 +1,5 @@
 ﻿using System.Threading.Tasks;
-using Goder.BL.DTO;
+using Goder.BL.DTO.CodeRunning;
 using Goder.DAL.Context;
 using Goder.DAL.Enums;
 using Microsoft.AspNetCore.SignalR;

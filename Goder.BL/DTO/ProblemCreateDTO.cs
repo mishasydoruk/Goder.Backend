@@ -7,11 +7,11 @@ namespace Goder.BL.DTO
 {
     public class ProblemCreateDTO
     {
-        public String Name { get; set; }
-        public String Description { get; set; }
+        public string Name { get; set; }
+        public string Description { get; set; }
         public int TimeLimit { get; set; }
         public int MemoryLimit { get; set; }
         
-        public ICollection<Test> Tests { get; set; }
+        public ICollection<TestDTO> Tests { get; set; }
     }
 }

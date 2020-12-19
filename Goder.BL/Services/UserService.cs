@@ -17,9 +17,7 @@ namespace Goder.BL.Services
     public class UserService : Abstract.BaseService
     {
         public UserService(GoderContext context, IMapper mapper) : base(context, mapper)
-        {
-
-        }
+        { }
 
         public async Task<UserDTO> GetUser(Guid id)
         {
