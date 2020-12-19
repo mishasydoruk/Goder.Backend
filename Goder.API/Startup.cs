@@ -14,6 +14,23 @@ using Microsoft.IdentityModel.Tokens;
 using System.Linq;
 using System.Reflection;
 using Goder.BL.MappingProfiles;
+using AutoMapper;
+using Goder.BL.Services;
+using Goder.DAL.Context;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Diagnostics.HealthChecks;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Diagnostics.HealthChecks;
+using Microsoft.Extensions.Hosting;
+using Microsoft.IdentityModel.Tokens;
+using System.Linq;
+using System.Reflection;
+using Goder.BL.MappingProfiles;
+using Goder.BL.Services;
 using Goder.BL.Hubs;
 using RabbitMQ.Wrapper.Services;
 using RabbitMQ.Wrapper.Models;
@@ -36,6 +53,7 @@ namespace Goder.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddScoped<UserService>();
+            services.AddScoped<ProblemService>();
 
             services.AddSignalR();
 
