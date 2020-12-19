@@ -12,6 +12,6 @@ namespace Goder.BL.DTO
         public int TimeLimit { get; set; }
         public int MemoryLimit { get; set; }
         
-        public ICollection<TestDTO> Tests { get; set; }
+        public ICollection<TestCreateDTO> Tests { get; set; }
     }
 }

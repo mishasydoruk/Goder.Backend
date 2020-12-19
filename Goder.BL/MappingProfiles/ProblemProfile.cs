@@ -14,7 +14,8 @@ namespace Goder.BL.MappingProfiles
         public ProblemProfile()
         {
             CreateMap<ProblemDTO, Problem>().ReverseMap();
-            CreateMap<ProblemCreateDTO, Problem>().ReverseMap();
+            CreateMap<ProblemCreateDTO, Problem>()
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(_ => Guid.NewGuid()));
         }
     }
 }

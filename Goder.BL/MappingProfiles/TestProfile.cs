@@ -11,6 +11,8 @@ namespace Goder.BL.MappingProfiles
         {
             CreateMap<TestDTO, Test>().ReverseMap();
             CreateMap<TestData, TestDTO>().ReverseMap();
+            CreateMap<TestCreateDTO, Test>()
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(_ => Guid.NewGuid()));
         }
     }
 }
