@@ -15,7 +15,6 @@ using System.Linq;
 using System.Reflection;
 using Goder.BL.MappingProfiles;
 using Goder.BL.Hubs;
-
 using RabbitMQ.Wrapper.Services;
 using RabbitMQ.Wrapper.Models;
 
