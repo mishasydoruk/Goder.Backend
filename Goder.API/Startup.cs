@@ -1,6 +1,7 @@
 using AutoMapper;
 using Goder.BL.Hubs;
 using Goder.BL.MappingProfiles;
+using Goder.BL.Providers;
 using Goder.BL.Services;
 using Goder.DAL.Context;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -36,6 +37,8 @@ namespace Goder.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddScoped<UserService>();
+            services.AddScoped<CodeRunnerProvider>();
+            services.AddScoped<SolutionService>();
             services.AddScoped<ProblemService>();
 
             services.AddSignalR();
