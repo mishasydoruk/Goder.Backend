@@ -14,8 +14,10 @@ using Microsoft.IdentityModel.Tokens;
 using System.Linq;
 using System.Reflection;
 using Goder.BL.MappingProfiles;
-using Goder.BL.Services;
 using Goder.BL.Hubs;
+
+using RabbitMQ.Wrapper.Services;
+using RabbitMQ.Wrapper.Models;
 
 namespace Goder.API
 {
@@ -42,6 +44,10 @@ namespace Goder.API
 
             services.AddControllers()
                     .AddNewtonsoftJson(options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+
+            var rabbitMqOptions = Configuration.GetSection("RabbitMq").Get<RabbitMQOptions>();
+            services.AddScoped<MessageFactory>(_ => new MessageFactory(rabbitMqOptions));
+            services.AddScoped<QueueService>();
 
             var corsOrigins = Configuration.GetSection("AllowedCorsOrigins").GetChildren().Select(c => c.Value).ToArray();
 
