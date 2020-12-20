@@ -3,6 +3,7 @@ using Goder.BL.Services;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
@@ -23,13 +24,15 @@ namespace Goder.API
         [HttpGet("{id}")]
         public async Task<ActionResult<ProblemDTO>> Get(Guid id)
         {
-            return Ok(await _problemService.GetProblem(id));
+            var email = HttpContext?.User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email)?.Value;
+            return Ok(await _problemService.GetProblem(id, email));
         }
 
-        [HttpGet("{skip/take}")]
-        public async Task<ActionResult<ICollection<ProblemDTO>>> Get(int skip, int take)
+        [HttpGet("{skip}/{take}")]
+        public async Task<ActionResult<ICollection<ProblemSimplifiedDTO>>> Get(int skip, int take)
         {
-            return Ok(await _problemService.GetProblems(skip, take));
+            var email = HttpContext?.User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email)?.Value;
+            return Ok(await _problemService.GetProblems(skip, take, email));
         }
 
         [HttpPut("{id}")]
@@ -38,10 +41,11 @@ namespace Goder.API
             return Ok(await _problemService.UpdateProblem(id, problem));
         }
 
-        [HttpPut()]
-        public async Task<ActionResult> Post([FromBody] ProblemDTO problem)
+        [HttpPost("{userId}")]
+        public async Task<ActionResult> Post(Guid userId, [FromBody] ProblemCreateDTO problem)
         {
-            return Ok(await _problemService.CreateProblem(problem, new Guid(HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier))));
+            //return Ok(await _problemService.CreateProblem(problem, new Guid(HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier))));
+            return Ok(await _problemService.CreateProblem(problem, userId));
         }
 
         [HttpDelete("{id}")]

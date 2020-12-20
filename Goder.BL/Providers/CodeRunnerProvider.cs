@@ -33,7 +33,10 @@ namespace Goder.BL.Providers
             };
 
             var senderSettings = _messageFactory.GetSenderSettings(RabbitMQQueueNames.SEND_TESTS, JsonConvert.SerializeObject(solutionTestData), true);
+            var queueSettings = _messageFactory.GetQueueSettings(RabbitMQQueueNames.SEND_TESTS);
 
+
+            _queueService.DeclareQueue(queueSettings);
             _queueService.SendMessageToQueue(senderSettings);
         }
     }

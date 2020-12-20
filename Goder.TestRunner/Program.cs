@@ -35,6 +35,8 @@ namespace Goder.TestRunner
             queueSettings = prodFactory.GetQueueSettings(RabbitMQQueueNames.SEND_TESTS);
 
             queueService = new QueueService();
+            queueService.DeclareQueue(queueSettings);
+            queueService.ListenQueue(queueSettings, false); 
             queueService.ReceiveMessage += GetMessage;
 
             connection = new HubConnectionBuilder()
@@ -53,7 +55,7 @@ namespace Goder.TestRunner
             var processOptions = configuration.GetSection("ProcessOptions").Get<ProcessOptions>();
             var testService = new TestService(processOptions);
 
-            testService.SaveScriptInFile(AppDomain.CurrentDomain.BaseDirectory, problemTestsData.Script);
+            testService.SaveScriptInFile(processOptions.WorkingDirectory, problemTestsData.Script);
 
             var problemResult = new ProblemTestDataResponse();
             problemResult.Id = problemTestsData.Id;

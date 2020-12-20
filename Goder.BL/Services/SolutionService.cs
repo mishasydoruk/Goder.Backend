@@ -20,19 +20,26 @@ namespace Goder.BL.Services
             _codeRunnerProvider = codeRunnerProvider;
         }
 
-        public async Task AddSolution(SolutionCreateDTO solution)
+        public async Task AddSolution(SolutionCreateDTO solution, string userEmail)
         {
+            var user = await _context.Users.FirstOrDefaultAsync(usr => usr.Email == userEmail);
+            if (user == null)
+            {
+                throw new NotFoundException(nameof(User));
+            }
+
             var newSolution = _mapper.Map<Solution>(solution);
-            var dbUser = await _context.Users.FirstOrDefaultAsync(c => c.Id == solution.CreatorId);
-            if (dbUser == null)
-                throw new NotFoundException(nameof(User), solution.CreatorId.ToString());
+            newSolution.CreatorId = user.Id;
             newSolution.CreatedAt = DateTimeOffset.Now;
+
             _context.Solutions.Add(newSolution);
             await _context.SaveChangesAsync();
+
             var dbSolution = await _context.Solutions
                 .Include(solve => solve.Problem)
                     .ThenInclude(problem => problem.Tests)
                 .FirstOrDefaultAsync(c => c.Id == newSolution.Id);
+
             var solutionDTO = _mapper.Map<SolutionDTO>(dbSolution);
             _codeRunnerProvider.SendCodeToExecute(solutionDTO);
         }

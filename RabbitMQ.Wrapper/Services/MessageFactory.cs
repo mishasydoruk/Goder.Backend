@@ -37,11 +37,12 @@ namespace RabbitMQ.Wrapper.Services
 
         public SenderSettings GetSenderSettings(string queueName, string message, bool persistent)
         {
+            connection = _factory.CreateConnection();
             channel = this.connection.CreateModel();
             var properties = channel.CreateBasicProperties();
             properties.Persistent = persistent;
 
-            return new SenderSettings { Channel = channel, Message = message, Properties = properties, QueueName = queueName };
+            return new SenderSettings() { Channel = channel, Message = message, Properties = properties, QueueName = queueName };
         }
     }
 }

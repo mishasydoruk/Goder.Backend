@@ -21,7 +21,7 @@ namespace Goder.TestRunner.Services
 
         public void SaveScriptInFile(string directory, string script)
         {
-            File.WriteAllText($"{directory}/main.py", script);
+            File.WriteAllText($"{directory}main.py", script);
         }
 
         public string StartTestInNewProcess(Test testData)
@@ -53,7 +53,7 @@ namespace Goder.TestRunner.Services
 
         public bool CompareResults(string expected, string current)
         {
-            return expected == current;
+            return expected.Replace("\r\n", "") == current.Replace("\r\n", "");
         }
     }
 }

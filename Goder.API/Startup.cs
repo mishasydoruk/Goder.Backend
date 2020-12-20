@@ -82,6 +82,9 @@ namespace Goder.API
             services.AddAutoMapper(cfg =>
             {
                 cfg.AddProfile<UserProfile>();
+                cfg.AddProfile<ProblemProfile>();
+                cfg.AddProfile<TestProfile>();
+                cfg.AddProfile<SolutionProfile>();
             }, Assembly.GetExecutingAssembly());
 
             services.AddHealthChecks()

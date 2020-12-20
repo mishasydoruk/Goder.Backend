@@ -42,7 +42,7 @@ namespace RabbitMQ.Wrapper.Services
                                  basicProperties: senderSettings.Properties,
                                  body: body);
 
-            SendMessage(senderSettings.Message, 0);
+            //SendMessage(senderSettings.Message, 0);
         }
 
         public void ReleaseRequest(IModel channel, ulong deliveryTag)
