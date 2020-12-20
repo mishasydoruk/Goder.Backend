@@ -1,4 +1,7 @@
 using AutoMapper;
+using Goder.BL.Hubs;
+using Goder.BL.MappingProfiles;
+using Goder.BL.Providers;
 using Goder.BL.Services;
 using Goder.DAL.Context;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -11,11 +14,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
+using RabbitMQ.Wrapper.Models;
+using RabbitMQ.Wrapper.Services;
 using System.Linq;
 using System.Reflection;
-using Goder.BL.MappingProfiles;
-using Goder.BL.Services;
-using Goder.BL.Hubs;
 
 namespace Goder.API
 {
@@ -35,6 +37,8 @@ namespace Goder.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddScoped<UserService>();
+            services.AddScoped<CodeRunnerProvider>();
+            services.AddScoped<SolutionService>();
             services.AddScoped<ProblemService>();
 
             services.AddSignalR();
@@ -43,6 +47,10 @@ namespace Goder.API
 
             services.AddControllers()
                     .AddNewtonsoftJson(options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+
+            var rabbitMqOptions = Configuration.GetSection("RabbitMq").Get<RabbitMQOptions>();
+            services.AddScoped<MessageFactory>(_ => new MessageFactory(rabbitMqOptions));
+            services.AddScoped<QueueService>();
 
             var corsOrigins = Configuration.GetSection("AllowedCorsOrigins").GetChildren().Select(c => c.Value).ToArray();
 
@@ -74,6 +82,9 @@ namespace Goder.API
             services.AddAutoMapper(cfg =>
             {
                 cfg.AddProfile<UserProfile>();
+                cfg.AddProfile<ProblemProfile>();
+                cfg.AddProfile<TestProfile>();
+                cfg.AddProfile<SolutionProfile>();
             }, Assembly.GetExecutingAssembly());
 
             services.AddHealthChecks()

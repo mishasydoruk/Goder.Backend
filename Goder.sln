@@ -3,18 +3,22 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30406.217
 MinimumVisualStudioVersion = 15.0.26124.0
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Goder.API", "Goder.API\Goder.API.csproj", "{3CCFECDD-8139-4E0E-BFAE-FD9EE96FAA8B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Goder.API", "Goder.API\Goder.API.csproj", "{3CCFECDD-8139-4E0E-BFAE-FD9EE96FAA8B}"
 	ProjectSection(ProjectDependencies) = postProject
 		{8528C003-590C-4964-9892-DFBFFF9E0933} = {8528C003-590C-4964-9892-DFBFFF9E0933}
 		{35152474-418D-446A-BF4A-C92E36D76C68} = {35152474-418D-446A-BF4A-C92E36D76C68}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Goder.BL", "Goder.BL\Goder.BL.csproj", "{35152474-418D-446A-BF4A-C92E36D76C68}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Goder.BL", "Goder.BL\Goder.BL.csproj", "{35152474-418D-446A-BF4A-C92E36D76C68}"
 	ProjectSection(ProjectDependencies) = postProject
 		{8528C003-590C-4964-9892-DFBFFF9E0933} = {8528C003-590C-4964-9892-DFBFFF9E0933}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Goder.DAL", "Goder.DAL\Goder.DAL.csproj", "{8528C003-590C-4964-9892-DFBFFF9E0933}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Goder.DAL", "Goder.DAL\Goder.DAL.csproj", "{8528C003-590C-4964-9892-DFBFFF9E0933}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RabbitMQ.Wrapper", "RabbitMQ.Wrapper\RabbitMQ.Wrapper.csproj", "{9665E428-FF79-4EF5-8DB8-130C161B4D68}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Goder.TestRunner", "Goder.TestRunner\Goder.TestRunner.csproj", "{29A54507-9C30-4908-A677-477DC8B59249}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -62,6 +66,30 @@ Global
 		{8528C003-590C-4964-9892-DFBFFF9E0933}.Release|x64.Build.0 = Release|Any CPU
 		{8528C003-590C-4964-9892-DFBFFF9E0933}.Release|x86.ActiveCfg = Release|Any CPU
 		{8528C003-590C-4964-9892-DFBFFF9E0933}.Release|x86.Build.0 = Release|Any CPU
+		{9665E428-FF79-4EF5-8DB8-130C161B4D68}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9665E428-FF79-4EF5-8DB8-130C161B4D68}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9665E428-FF79-4EF5-8DB8-130C161B4D68}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{9665E428-FF79-4EF5-8DB8-130C161B4D68}.Debug|x64.Build.0 = Debug|Any CPU
+		{9665E428-FF79-4EF5-8DB8-130C161B4D68}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{9665E428-FF79-4EF5-8DB8-130C161B4D68}.Debug|x86.Build.0 = Debug|Any CPU
+		{9665E428-FF79-4EF5-8DB8-130C161B4D68}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9665E428-FF79-4EF5-8DB8-130C161B4D68}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9665E428-FF79-4EF5-8DB8-130C161B4D68}.Release|x64.ActiveCfg = Release|Any CPU
+		{9665E428-FF79-4EF5-8DB8-130C161B4D68}.Release|x64.Build.0 = Release|Any CPU
+		{9665E428-FF79-4EF5-8DB8-130C161B4D68}.Release|x86.ActiveCfg = Release|Any CPU
+		{9665E428-FF79-4EF5-8DB8-130C161B4D68}.Release|x86.Build.0 = Release|Any CPU
+		{29A54507-9C30-4908-A677-477DC8B59249}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{29A54507-9C30-4908-A677-477DC8B59249}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{29A54507-9C30-4908-A677-477DC8B59249}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{29A54507-9C30-4908-A677-477DC8B59249}.Debug|x64.Build.0 = Debug|Any CPU
+		{29A54507-9C30-4908-A677-477DC8B59249}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{29A54507-9C30-4908-A677-477DC8B59249}.Debug|x86.Build.0 = Debug|Any CPU
+		{29A54507-9C30-4908-A677-477DC8B59249}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{29A54507-9C30-4908-A677-477DC8B59249}.Release|Any CPU.Build.0 = Release|Any CPU
+		{29A54507-9C30-4908-A677-477DC8B59249}.Release|x64.ActiveCfg = Release|Any CPU
+		{29A54507-9C30-4908-A677-477DC8B59249}.Release|x64.Build.0 = Release|Any CPU
+		{29A54507-9C30-4908-A677-477DC8B59249}.Release|x86.ActiveCfg = Release|Any CPU
+		{29A54507-9C30-4908-A677-477DC8B59249}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

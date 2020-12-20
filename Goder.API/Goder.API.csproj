@@ -21,6 +21,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Goder.BL\Goder.BL.csproj" />
     <ProjectReference Include="..\Goder.DAL\Goder.DAL.csproj" />
+    <ProjectReference Include="..\RabbitMQ.Wrapper\RabbitMQ.Wrapper.csproj" />
   </ItemGroup>
 
 </Project>

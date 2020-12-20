@@ -3,14 +3,16 @@ using System;
 using Goder.DAL.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Goder.DAL.Migrations
 {
     [DbContext(typeof(GoderContext))]
-    partial class GoderContextModelSnapshot : ModelSnapshot
+    [Migration("20201219164630_AddScriptForSolution")]
+    partial class AddScriptForSolution
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -72,7 +74,7 @@ namespace Goder.DAL.Migrations
                     b.Property<Guid>("ProblemId")
                         .HasColumnType("char(36)");
 
-                    b.Property<int?>("Result")
+                    b.Property<int>("Result")
                         .HasColumnType("int");
 
                     b.Property<string>("Script")

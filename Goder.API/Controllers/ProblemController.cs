@@ -1,14 +1,11 @@
+using Goder.BL.DTO;
+using Goder.BL.Services;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using Goder.DAL.Models;
-using System.Text.Json;
-using System.Text.Json.Serialization;
-using Goder.BL.DTO;
-using Goder.BL.Services;
 
 
 namespace Goder.API
@@ -24,43 +21,38 @@ namespace Goder.API
             _problemService = problemService;
         }
 
-
-        // GET api/<ProblemController>/5
         [HttpGet("{id}")]
         public async Task<ActionResult<ProblemDTO>> Get(Guid id)
         {
-            return Ok(await _problemService.GetProblem(id));
+            var email = HttpContext?.User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email)?.Value;
+            return Ok(await _problemService.GetProblem(id, email));
         }
-        
-        [HttpGet("{skip/take}")]
-        public async Task<ActionResult<ICollection<ProblemDTO>>> Get(int skip ,int take)
+
+        [HttpGet("{skip}/{take}")]
+        public async Task<ActionResult<ICollection<ProblemSimplifiedDTO>>> Get(int skip, int take)
         {
-            return Ok(await _problemService.GetProblems(skip, take));
+            var email = HttpContext?.User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email)?.Value;
+            return Ok(await _problemService.GetProblems(skip, take, email));
         }
 
-
-        // PUT api/<UserController>/5
         [HttpPut("{id}")]
         public async Task<ActionResult> Put(Guid id, [FromBody] ProblemDTO problem)
         {
             return Ok(await _problemService.UpdateProblem(id, problem));
         }
-        
-        // POST api/<UserController>/
-        [HttpPut()]
-        public async Task<ActionResult> Post([FromBody] ProblemDTO problem)
+
+        [HttpPost("{userId}")]
+        public async Task<ActionResult> Post(Guid userId, [FromBody] ProblemCreateDTO problem)
         {
-            return Ok(await _problemService.CreateProblem(problem,new Guid(HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier))));
+            //return Ok(await _problemService.CreateProblem(problem, new Guid(HttpContext.User.FindFirstValue(ClaimTypes.NameIdentifier))));
+            return Ok(await _problemService.CreateProblem(problem, userId));
         }
-        
-        // Delete api/<UserController>/5
+
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(Guid id)
         {
-            
+
             return Ok(_problemService.DeleteProblem(id));
         }
-
-        
     }
 }

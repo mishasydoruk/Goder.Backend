@@ -1,9 +1,13 @@
+﻿using Goder.DAL.Enums;
 using System;
-using Goder.DAL.Enums;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace Goder.DAL.Models
+namespace Goder.BL.DTO
 {
-    public class Solution
+    public class SolutionDTO
     {
         public Guid Id { get; set; }
         public DateTimeOffset CreatedAt { get; set; }
@@ -14,10 +18,9 @@ namespace Goder.DAL.Models
         public string Script { get; set; }
 
         public Guid CreatorId { get; set; }
-        public User Creator { get; set; }
-        
-        public Guid ProblemId { get; set; }
-        public Problem Problem { get; set; }
+        public UserDTO Creator { get; set; }
 
+        public Guid ProblemId { get; set; }
+        public ProblemDTO Problem { get; set; }
     }
 }

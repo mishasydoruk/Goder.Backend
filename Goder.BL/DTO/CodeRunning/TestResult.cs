@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace Goder.BL.DTO
+namespace Goder.BL.DTO.CodeRunning
 {
     public class TestResult
     {
